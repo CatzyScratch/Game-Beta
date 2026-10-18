@@ -1,0 +1,25 @@
+{
+ "next": 20,
+ "tiles": {
+  "0": "Wall.png",
+  "1": "Shelf-Topright.png",
+  "2": "Shelf-Topleft.png",
+  "3": "Shelf-middleleft.png",
+  "4": "Shelf-middleright.png",
+  "5": "Shelf-Bottomright.png",
+  "6": "Shelf-Bottomleft.png",
+  "7": "Bed-Bottom.png",
+  "8": "Bed-Top.png",
+  "9": "Wood-Floor.png",
+  "10": "Trigger Tile(Door).png",
+  "11": "Shelf-bottommiddle.png",
+  "12": "Shelf-Topmiddle.png",
+  "13": "Bed-BottomFlippped.png",
+  "14": "Bed-TopFlippped.png",
+  "15": "Round-Table.png",
+  "16": "Wood-Floor-Damaged.png",
+  "17": "Table-right.png",
+  "18": "Table-middle.png",
+  "19": "Table-Left.png"
+ }
+}
