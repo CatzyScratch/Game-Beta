@@ -49,8 +49,25 @@ PlrM = False
 PlrPX, PlrPY = Plr.x, Plr.y
 PlrMD = 0
 PlrD = "None"
-PlrImg = py.image.load(f"assets/character images/Player-Idle-Front.png")
-PlrImg = py.transform.scale(PlrImg, (TileS, TileS))
+#Player images
+PlrSps = [
+    py.transform.scale(py.image.load(path.strip()).convert_alpha(), (TileS, TileS))
+    for path in loadr("assets/character images/sprites.texf") if path.strip()
+]
+#Image indexes
+PlrISps = {
+    "L": PlrSps[0:3],
+    "R": PlrSps[3:6],
+    "U": PlrSps[6:9],
+    "D": PlrSps[9:12]
+}
+F = {"L": 1, "R": 1, "U": 1, "D": 1,}
+PlrImg = PlrISps["U"][0]
+
+#Image swapper
+def imgf(x):
+    F[x] *= -1
+    return PlrISps[x][1 if F[x] == 1 else 2]
 
 #Tile collision handler
 def coli(x, y):
@@ -76,21 +93,25 @@ def mov():
         if k[py.K_LEFT] and not coli(x-1, y):
             PlrD = "LEFT"
             PlrMD = -4
+            PlrImg = imgf("L")
             PlrM = True
 
         if k[py.K_UP] and not coli(x, y-1):
             PlrD = "UP"
             PlrMD = -4
+            PlrImg = imgf("U")
             PlrM = True
 
         if k[py.K_DOWN] and not coli(x, y+1):
             PlrD = "DOWN"
             PlrMD = 4
+            PlrImg = imgf("D")
             PlrM = True
             
         if k[py.K_RIGHT] and not coli(x+1, y):
             PlrD = "RIGHT"
             PlrMD = 4
+            PlrImg = imgf("R")
             PlrM = True
 
     #NES Style glide (Very bad implementation ik)
@@ -101,28 +122,28 @@ def mov():
                 if not PlrPX + 56 > 480 - 56:
                     if not Plr.x == PlrPX + 56:
                         Plr.x += PlrMD
-                    else: PlrM = False;PlrPX, PlrPY = Plr.x, Plr.y
+                    else: PlrM = False;PlrPX, PlrPY = Plr.x, Plr.y;PlrImg = PlrISps["R"][0]
                 else: PlrM = False;PlrPX, PlrPY = Plr.x, Plr.y
                         
             elif PlrD == "LEFT":
                 if not PlrPX - 56 < 0:
                     if not Plr.x == PlrPX - 56:
                         Plr.x += PlrMD
-                    else: PlrM = False;PlrPX, PlrPY = Plr.x, Plr.y
+                    else: PlrM = False;PlrPX, PlrPY = Plr.x, Plr.y;PlrImg = PlrISps["L"][0]
                 else: PlrM = False;PlrPX, PlrPY = Plr.x, Plr.y
 
         elif PlrD == "UP":
             if not PlrPY - 56 < 0:
                 if not Plr.y == PlrPY - 56:
                     Plr.y += PlrMD
-                else: PlrM = False;PlrPX, PlrPY = Plr.x, Plr.y
+                else: PlrM = False;PlrPX, PlrPY = Plr.x, Plr.y;PlrImg = PlrISps["U"][0]
             else: PlrM = False;PlrPX, PlrPY = Plr.x, Plr.y
 
         elif PlrD == "DOWN":
             if not PlrPY + 56 > 360 - 56:
                 if not Plr.y == PlrPY + 56:
                     Plr.y += PlrMD
-                else: PlrM = False;PlrPX, PlrPY = Plr.x, Plr.y
+                else: PlrM = False;PlrPX, PlrPY = Plr.x, Plr.y;PlrImg = PlrISps["D"][0]
             else: PlrM = False;PlrPX, PlrPY = Plr.x, Plr.y
       
 def upd():
