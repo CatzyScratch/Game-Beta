@@ -5,7 +5,7 @@ py.init()
 
 #Window Setup
 WindowW, WindowH = 480, 360
-Window = py.display.set_mode((WindowW, WindowH))
+Window = py.display.set_mode((WindowW, WindowH), py.RESIZABLE | py.SCALED)
 WindowC, WindowT, Tick = py.display.set_caption("Horror Game"), py.time.Clock(), 30
 
 #Map Setup
@@ -26,11 +26,9 @@ Texs = [
     for path in loadr("assets/map files/textures.texf")
 ]
 
-'''
 print("Textures loaded:", len(Texs))
 print("Map:", Map)
 print("Highest tile ID:", max(max(row) for row in Map))
-'''
 
 #TileMap Drawer
 def drawm(x, y):
