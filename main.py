@@ -10,7 +10,7 @@ WindowC, WindowT, Tick = py.display.set_caption("Horror Game"), py.time.Clock(),
 
 #Map Setup
 TileS = 56
-Coli = {0, 1, 2, 3, 4, 5, 6, 7, 13, 17, 18, 19}
+Coli = {0, 1, 2, 3, 4, 5, 6, 7, 11, 12, 13, 17, 18, 19}
 Trans = {12}
 
 #General purpose file loader
@@ -65,10 +65,10 @@ def mov():
     
     #Key detection
     x, y = Plr.x // TileS, Plr.y // TileS
-
+    '''
     if not PlrM and Map[y][x] in Trans:
         next_map()
-        return
+        return'''
     
     if not PlrM == True:
         PlrPX, PlrPY = Plr.x, Plr.y
